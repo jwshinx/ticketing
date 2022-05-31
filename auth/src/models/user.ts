@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Password } from '../services/password';
 
 // required
 interface UserAttrs {
@@ -38,6 +39,16 @@ const userSchema = new mongoose.Schema({
     }
   }
 });
+
+// not arrow function because 'this' is user, not class context.
+// doesnt support async/wait can so have to forward 'done' function
+userSchema.pre('save', async function(done) {
+  if (this.isModified('password')) { // new and updated password only
+    const hashed = await Password.toHash(this.get('password'));
+    this.set('password', hashed);
+  }
+  done()
+})
 
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs)

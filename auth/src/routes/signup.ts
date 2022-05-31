@@ -30,7 +30,7 @@ router.post(
       throw new BadRequestError('email in use')
     }
 
-    const user = User.build({ email, password})
+    const user = User.build({ email, password })
     await user.save()
     res.status(201).send(user)
   }
