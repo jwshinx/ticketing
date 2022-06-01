@@ -13,8 +13,10 @@ export default ({ url, method, body, onSuccess }) => {
         url,
         { ...body, ...props }
       );
- 
+
+      console.log('+++> ur 1')
       if (onSuccess) {
+        console.log('+++> ur 2')
         onSuccess(response.data);
       }
 
