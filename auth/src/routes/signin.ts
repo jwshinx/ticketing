@@ -1,40 +1,15 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import jwt from 'jsonwebtoken';
+
 import { validateRequest } from '../middlewares/validate-request';
+import { BadRequestError } from '../errors/bad-request-error'
+import { User } from '../models/user';
+import { Password } from '../services/password';
 
 const router = express.Router();
 
 router.post('/api/users/signin',
-  [
-    body('email')
-      .isEmail()
-      .withMessage('Email must be valid'),
-    body('password')
-      .trim()
-      .notEmpty()
-      .withMessage('You must supply a password')
-  ],
-  validateRequest,
-  (req: Request, res: Response) => {
-
-  }
-);
-
-export { router as signinRouter };
-
-/******** */
-/*
-import express, { Request, Response } from 'express';
-import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@jslamela/common';
-
-import { Password } from '../services/password';
-import { User } from '../models/user';
-
-const router = express.Router();
-
-router.post('/api/users/signin', 
   [
     body('email')
       .isEmail()
@@ -66,7 +41,7 @@ router.post('/api/users/signin',
         email: existingUser.email
       },
       process.env.JWT_KEY!
-    );
+    )
 
     // store in session object
     req.session = {
@@ -78,4 +53,3 @@ router.post('/api/users/signin',
 );
 
 export { router as signinRouter };
-*/
