@@ -3,7 +3,9 @@ import 'express-async-errors'
 import { json } from 'body-parser'
 import mongoose from 'mongoose'
 import cookieSession from 'cookie-session'
-import { errorHandler, NotFoundError } from '@jslamela/common'
+import { errorHandler, NotFoundError, currentUser } from '@jslamela/common'
+
+import { createTicketRouter } from './routes/new'
 
 const app = express()
 app.set('trust proxy', true)
@@ -14,6 +16,9 @@ app.use(
     secure: true
   })
 )
+
+app.use(currentUser)
+app.use(createTicketRouter)
 
 // use "all" -- includes get, post, etc.
 app.all('*', async (req, res, next) => {
