@@ -5,11 +5,6 @@ import mongoose from 'mongoose'
 import cookieSession from 'cookie-session'
 import { errorHandler, NotFoundError } from '@jslamela/common'
 
-import { currentUserRouter } from './routes/current-user'
-import { signinRouter } from './routes/signin'
-import { signoutRouter } from './routes/signout'
-import { signupRouter } from './routes/signup'
-
 const app = express()
 app.set('trust proxy', true)
 app.use(json())
@@ -19,11 +14,6 @@ app.use(
     secure: true
   })
 )
-
-app.use(currentUserRouter)
-app.use(signinRouter)
-app.use(signupRouter)
-app.use(signoutRouter)
 
 // use "all" -- includes get, post, etc.
 app.all('*', async (req, res, next) => {
@@ -44,7 +34,7 @@ const start = async () => {
 
   try {
     await mongoose.connect(process.env.MONGO_URI)
-    console.log('connected to auth mongodb')
+    console.log('connected to tickets mongodb')
   } catch(err) {
     console.log(err)
   }
