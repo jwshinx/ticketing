@@ -3,6 +3,13 @@ import nats, { Message } from 'node-nats-streaming';
 import uniqid from 'uniqid';
 // import { TicketCreatedListener } from './events/ticket-created-listener';
 
+/**
+ * important
+ * here, in ticketing project, i did not complete listener implementation. 
+ * below is half baked. the work has already been done in boxoffice and moved
+ * to @jslamela/common. im moving on
+ */
+
 console.clear();
 
 const clientid = uniqid();

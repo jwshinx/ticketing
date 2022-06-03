@@ -1,6 +1,13 @@
 import nats from 'node-nats-streaming';
 // import { TicketCreatedPublisher } from './events/ticket-created-publisher';
 
+/**
+ * important
+ * here, in ticketing project, i did not complete publisher implementation. 
+ * below is half baked. the work has already been done in boxoffice and moved
+ * to @jslamela/common. im moving on
+ */
+
 console.clear();
 
 const stan = nats.connect('ticketing', 'abc', {
