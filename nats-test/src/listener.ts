@@ -1,12 +1,13 @@
 import nats, { Message } from 'node-nats-streaming';
-// import uniqid from 'uniqid';
+// import { randomBytes } from 'crypto'
+import uniqid from 'uniqid';
 // import { TicketCreatedListener } from './events/ticket-created-listener';
 
 console.clear();
 
-// const clientid = uniqid();
+const clientid = uniqid();
 // var uniqid = require('uniqid');
-const stan = nats.connect('ticketing', '123', {
+const stan = nats.connect('ticketing', clientid, {
   url: 'http://localhost:4222',
 });
 
@@ -14,7 +15,10 @@ const stan = nats.connect('ticketing', '123', {
 stan.on('connect', () => {
   console.log('Listener connected to nats');
 
-  const subscription = stan.subscribe('ticket:created')
+  const subscription = stan.subscribe(
+    'ticket:created',
+    'fooListenerQueueGroup'
+  )
 
   // @ts-ignore
   subscription.on('message', (msg: Message) => {
