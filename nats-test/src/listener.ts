@@ -15,9 +15,14 @@ const stan = nats.connect('ticketing', clientid, {
 stan.on('connect', () => {
   console.log('Listener connected to nats');
 
+  const options = stan
+    .subscriptionOptions()
+    .setManualAckMode(true)
+
   const subscription = stan.subscribe(
     'ticket:created',
-    'fooListenerQueueGroup'
+    'fooListenerQueueGroup',
+    options
   )
 
   // @ts-ignore
@@ -27,6 +32,7 @@ stan.on('connect', () => {
       console.log(`received event #${msg.getSequence()}, data: ${data}`)  
     }
     // console.log('message received')
+    msg.ack()
   })
   // @ts-ignore
   // stan.on('close', () => {
