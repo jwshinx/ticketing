@@ -15,6 +15,12 @@ const stan = nats.connect('ticketing', clientid, {
 stan.on('connect', () => {
   console.log('Listener connected to nats');
 
+  // @ts-ignore
+  stan.on('close', () => {
+    console.log('nats connection closed!');
+    // @ts-ignore
+    process.exit();
+  });
   const options = stan
     .subscriptionOptions()
     .setManualAckMode(true)
@@ -34,17 +40,11 @@ stan.on('connect', () => {
     // console.log('message received')
     msg.ack()
   })
-  // @ts-ignore
-  // stan.on('close', () => {
-  //   console.log('nats connection closed!');
-  //   // @ts-ignore
-  //   process.exit();
-  // });
 
   // new TicketCreatedListener(stan).listen();
 });
 
-// // @ts-ignore
-// process.on('SIGINT', () => stan.close());
-// // @ts-ignore
-// process.on('SIGTERM', () => stan.close());
+// @ts-ignore
+process.on('SIGINT', () => stan.close()); // interrupt
+// @ts-ignore
+process.on('SIGTERM', () => stan.close()); // terminate
