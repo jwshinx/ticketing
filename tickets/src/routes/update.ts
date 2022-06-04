@@ -8,8 +8,8 @@ import {
   // BadRequestError
 } from '@jslamela/common';
 import { Ticket } from '../models/ticket';
-// import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
-// import { natsWrapper } from '../nats-wrapper';
+import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -46,13 +46,13 @@ router.put(
       price: req.body.price
     });
     await ticket.save();
-    // new TicketUpdatedPublisher(natsWrapper.client).publish({ // "get client" without ()
-    //   id: ticket.id,
-    //   title: ticket.title,
-    //   price: ticket.price,
-    //   userId: ticket.userId,
-    //   version: ticket.version
-    // });
+    new TicketUpdatedPublisher(natsWrapper.client).publish({ // "get client" without ()
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: 77
+    });
 
     res.send(ticket);
   }
