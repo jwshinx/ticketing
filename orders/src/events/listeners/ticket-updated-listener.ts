@@ -8,13 +8,8 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: TicketUpdatedEvent['data'], msg: Message) {
-    // const ticket = await Ticket.findByPreviousEvent(data);
-    // const ticket = await Ticket.findById(data.id);
     console.log('xxx orders TicketUpdatedListener onMsg 0')
-    const ticket = await Ticket.findOne({
-      _id: data.id,
-      version: data.version - 1
-    });
+    const ticket = await Ticket.findByPreviousEvent(data);
 
     console.log('xxx orders TicketUpdatedListener onMsg 1')
     if (!ticket) {
