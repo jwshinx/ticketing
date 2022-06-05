@@ -31,7 +31,7 @@ router.post(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
-      version: 99,
+      version: ticket.version,
     })
     console.log('+++> tickets.routes.new.ts 2')
     res.status(201).send(ticket)

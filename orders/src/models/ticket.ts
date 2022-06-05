@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
 import { Order, OrderStatus } from './order';
 
 interface TicketAttrs {
@@ -10,7 +11,7 @@ interface TicketAttrs {
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
-  // version: number;
+  version: number;
   isReserved(): Promise<boolean>;
 }
 
@@ -41,8 +42,8 @@ const ticketSchema = new mongoose.Schema(
   }
 );
 
-// ticketSchema.set('versionKey', 'version');
-// // ticketSchema.plugin(updateIfCurrentPlugin);
+ticketSchema.set('versionKey', 'version');
+ticketSchema.plugin(updateIfCurrentPlugin);
 // // https://mongoosejs.com/docs/api/model.html#model_Model-$where
 // // find record to update given extra condition of version, aside from id
 // ticketSchema.pre('save', function(done) {
