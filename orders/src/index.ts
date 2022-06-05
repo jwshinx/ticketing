@@ -4,6 +4,8 @@ import { json } from 'body-parser'
 import mongoose from 'mongoose'
 import cookieSession from 'cookie-session'
 import { errorHandler, NotFoundError, currentUser } from '@jslamela/common'
+import { TicketCreatedListener } from './events/listeners/ticket-created-listener'
+import { TicketUpdatedListener } from './events/listeners/ticket-updated-listener'
 
 import { deleteOrderRouter } from './routes/delete'
 import { indexOrderRouter } from './routes/index'
@@ -67,6 +69,9 @@ const start = async () => {
     })
     process.on('SIGINT', () => natsWrapper.client.close())
     process.on('SIGTERM', () => natsWrapper.client.close())
+
+    new TicketCreatedListener(natsWrapper.client).listen()
+    new TicketUpdatedListener(natsWrapper.client).listen()
 
     await mongoose.connect(process.env.MONGO_URI)
     console.log('connected to orders mongodb')

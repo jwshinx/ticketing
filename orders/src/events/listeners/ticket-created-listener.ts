@@ -11,7 +11,7 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
     const { id, title, price } = data;
 
     const ticket = Ticket.build({
-      // id,
+      id,
       title,
       price
     });
