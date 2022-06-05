@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
+// import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
 import { Order, OrderStatus } from './order';
 
 interface TicketAttrs {
@@ -43,16 +43,18 @@ const ticketSchema = new mongoose.Schema(
 );
 
 ticketSchema.set('versionKey', 'version');
-ticketSchema.plugin(updateIfCurrentPlugin);
-// // https://mongoosejs.com/docs/api/model.html#model_Model-$where
-// // find record to update given extra condition of version, aside from id
-// ticketSchema.pre('save', function(done) {
-//   // @ts-ignore
-//   this.$where = {
-//     version: this.get('version') - 1
-//   };
-//   done();
-// });
+// ticketSchema.plugin(updateIfCurrentPlugin);
+// in lieu of updateIfCurrentPlugin, lets implmt it manually, its more flexible
+//   eg: maybe we increment by 100, not 1?
+// https://mongoosejs.com/docs/api/model.html#model_Model-$where
+// find record to update given extra condition of version, aside from id
+ticketSchema.pre('save', function(done) {
+  // @ts-ignore
+  this.$where = {
+    version: this.get('version') - 1
+  };
+  done();
+});
 
 ticketSchema.statics.findByPreviousEvent =(event: { id: string, version: number }) => {
   return Ticket.findOne({
