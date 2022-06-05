@@ -20,16 +20,20 @@ app.use(
     secure: true
   })
 )
-
+console.log('+++> tickets.index 0')
 app.use(currentUser)
+console.log('+++> tickets.index 1')
 app.use(createTicketRouter)
+console.log('+++> tickets.index 2')
 app.use(showTicketRouter)
 app.use(indexTicketRouter)
 app.use(updateTicketRouter)
+console.log('+++> tickets.index 3')
 
 // use "all" -- includes get, post, etc.
 app.all('*', async (req, res, next) => {
   // next(new NotFoundError())
+  console.log('+++> tickets.index.ts: route not found')
   throw new NotFoundError()
 })
 
@@ -73,7 +77,7 @@ const start = async () => {
     console.log(err)
   }
   app.listen(3000, () => {
-    console.log('listening on port 3000!!!')
+    console.log('listening on port 3000!!xxx!')
   })
 }
 

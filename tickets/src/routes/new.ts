@@ -9,7 +9,7 @@ import { natsWrapper } from '../nats-wrapper'
 const router = express.Router()
 
 router.post(
-  '/app/tickets',
+  '/api/tickets',
   requireAuth,
   [
     body('title').not().isEmpty().withMessage('title is required'),
@@ -23,7 +23,9 @@ router.post(
       price,
       userId: req.currentUser!.id
     })
+    console.log('+++> tickets.routes.new.ts 0')
     await ticket.save()
+    console.log('+++> tickets.routes.new.ts 1')
     await new TicketCreatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
@@ -31,6 +33,7 @@ router.post(
       userId: ticket.userId,
       version: 99,
     })
+    console.log('+++> tickets.routes.new.ts 2')
     res.status(201).send(ticket)
   }
 )
