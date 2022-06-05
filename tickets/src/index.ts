@@ -10,6 +10,8 @@ import { showTicketRouter } from './routes/show'
 import { indexTicketRouter } from './routes/index'
 import { updateTicketRouter } from './routes/update'
 import { natsWrapper } from './nats-wrapper'
+import { OrderCreatedListener } from './events/listeners/order-created-listener'
+import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
 
 const app = express()
 app.set('trust proxy', true)
@@ -70,6 +72,9 @@ const start = async () => {
     })
     process.on('SIGINT', () => natsWrapper.client.close())
     process.on('SIGTERM', () => natsWrapper.client.close())
+
+    new OrderCreatedListener(natsWrapper.client).listen()
+    new OrderCancelledListener(natsWrapper.client).listen()
 
     await mongoose.connect(process.env.MONGO_URI)
     console.log('connected to tickets mongodb')
