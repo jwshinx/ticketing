@@ -12,7 +12,7 @@ interface TicketDoc extends mongoose.Document {
   price: number;
   userId: string;
   version: number;
-  // orderId?: string;
+  orderId?: string; // optional. filled in, then locked. otherwise, its avail
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -33,9 +33,9 @@ const ticketSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    // orderId: {
-    //   type: String
-    // }
+    orderId: { // populate with orderId to lock, if ticket reserved (eg for purchase)
+      type: String
+    }
   },
   {
     toJSON: {
