@@ -15,7 +15,7 @@ const NewTicket = () => {
     },
     onSuccess: (ticket) => {
       console.log("+++> tickets.new ticket created successfully:", ticket);
-      // Router.push('/');
+      Router.push('/');
     },
   });
 
