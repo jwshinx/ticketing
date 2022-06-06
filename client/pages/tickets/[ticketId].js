@@ -20,7 +20,7 @@ const TicketShow = ({ ticket }) => {
   return (
     <div>
       <h1>{ticket.title}</h1>
-      <h4>Price2: {ticket.price}</h4>
+      <h4>Price3: {ticket.price}</h4>
       {errors}
       <button
         onClick={() => doRequest()}

@@ -11,6 +11,7 @@ import { deleteOrderRouter } from './routes/delete'
 import { indexOrderRouter } from './routes/index'
 import { newOrderRouter } from './routes/new'
 import { showOrderRouter } from './routes/show'
+
 import { natsWrapper } from './nats-wrapper'
 
 const app = express()
