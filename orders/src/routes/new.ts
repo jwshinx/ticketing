@@ -30,9 +30,11 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
+    console.log('+++> orders: /api/orders - create order 0')
     const { ticketId } = req.body;
     const ticket = await Ticket.findById(ticketId);
 
+    console.log('+++> orders: /api/orders - create order 1')
     if (!ticket) {
       throw new NotFoundError();
     }
@@ -43,20 +45,24 @@ router.post(
       throw new BadRequestError('Ticket not available');
     }
 
+    console.log('+++> orders: /api/orders - create order 2')
     // order expires in 1 minute
     const expiration = new Date();
     expiration.setSeconds(
       expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS
     );
 
+    console.log('+++> orders: /api/orders - create order 3')
     const order = Order.build({
       userId: req.currentUser!.id,
       status: OrderStatus.Created,
       expiresAt: expiration,
       ticket
     });
+    console.log('+++> orders: /api/orders - create order 4')
     await order.save();
 
+    console.log('+++> orders: /api/orders - create order 5')
     new OrderCreatedPublisher(natsWrapper.client).publish({
       id: order.id,
       status: order.status,

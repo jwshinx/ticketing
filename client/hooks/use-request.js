@@ -7,7 +7,9 @@ export default ({ url, method, body, onSuccess }) => {
 
   const doRequest = async (props = {}) => {
     try {
+      console.log('+++> ur 0')
       setErrors(null);
+      console.log('+++> ur 0.1')
       // axios handles get, post, put, etc
       const response = await axios[method](
         url,
