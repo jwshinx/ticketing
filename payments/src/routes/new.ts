@@ -29,7 +29,6 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    res.send({ success: true });
     const { token, orderId } = req.body;
 
     const order = await Order.findById(orderId);
@@ -44,26 +43,26 @@ router.post(
       throw new BadRequestError('Cannot pay for a cancelled order');
     }
 
-    // const charge = await stripe.charges.create({
-    //   currency: 'usd',
-    //   amount: order.price * 100,
-    //   source: token,
-    // });
+    const charge = await stripe.charges.create({
+      currency: 'usd',
+      amount: order.price * 100,
+      source: token,
+    });
 
-    // const payment = Payment.build({
-    //   orderId,
-    //   stripeId: charge.id,
-    // });
-    // await payment.save();
+    const payment = Payment.build({
+      orderId,
+      stripeId: charge.id,
+    });
+    await payment.save();
 
-    // // await is optional. dont need to block
-    // new PaymentCreatedPublisher(natsWrapper.client).publish({
-    //   id: payment.id,
-    //   orderId: payment.orderId,
-    //   stripeId: payment.stripeId,
-    // });
+    // await is optional. dont need to block
+    new PaymentCreatedPublisher(natsWrapper.client).publish({
+      id: payment.id,
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+    });
 
-    // res.status(201).send({ id: payment.id });
+    res.status(201).send({ id: payment.id });
   }
 );
 
