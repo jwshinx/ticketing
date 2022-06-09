@@ -4,6 +4,9 @@ import { json } from 'body-parser'
 import mongoose from 'mongoose'
 import cookieSession from 'cookie-session'
 import { errorHandler, NotFoundError, currentUser } from '@jslamela/common'
+import { OrderCreatedListener } from './events/listeners/order-created-listener';
+import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
+import { createChargeRouter } from './routes/new'
 
 import { natsWrapper } from './nats-wrapper'
 
@@ -18,6 +21,7 @@ app.use(
 )
 
 app.use(currentUser)
+app.use(createChargeRouter)
 
 // use "all" -- includes get, post, etc.
 app.all('*', async (req, res, next) => {
@@ -59,6 +63,9 @@ const start = async () => {
     })
     process.on('SIGINT', () => natsWrapper.client.close())
     process.on('SIGTERM', () => natsWrapper.client.close())
+
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI)
     console.log('connected to tickets mongodb')
