@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 // import Router from 'next/router';
 // import useRequest from '../../hooks/use-request';
 
-// const OrderShow = ({ order, currentUser }) => {
-const OrderShow = ({ order }) => {
-
+const OrderShow = ({ order, currentUser }) => {
   const [timeLeft, setTimeLeft] = useState(0);
   // const { doRequest, errors } = useRequest({
   //   url: '/api/payments',
@@ -45,6 +43,7 @@ const OrderShow = ({ order }) => {
       <p>
         Time remaining: {timeLeft} seconds
       </p>
+      <p>Email: {currentUser.email}</p>
       <p>
         Order Id: {order.id}
       </p>
