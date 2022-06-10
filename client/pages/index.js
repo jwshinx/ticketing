@@ -20,7 +20,7 @@ const LandingPage = ({ currentUser, tickets }) => {
 
   return (
     <div>
-      <h1>Tickets</h1>
+      <h1>Tickets 1123pm</h1>
       <table className="table">
         <thead>
           <tr>
@@ -45,6 +45,8 @@ const LandingPage = ({ currentUser, tickets }) => {
 
 LandingPage.getInitialProps = async (context, client, currentUser) => {
   console.log("+++> LandingPage.getInitialProps 0 currentUser:", currentUser);
+  console.log('+++> env 1: ', process.env.TICKETING_SERVICE)
+  console.log('+++> env 2: ', process.env.STRIPE_PUBLISHABLE_KEY);
   const { data } = await client.get('/api/tickets')
   return { tickets: data }
 };

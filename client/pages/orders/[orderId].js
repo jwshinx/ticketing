@@ -50,7 +50,12 @@ const OrderShow = ({ order, currentUser }) => {
       <p>Ticket Id: {order.ticket.id}</p>
       <p>Ticket Title: {order.ticket.title}</p>
       <p>Ticket Price: ${order.ticket.price}</p>
-      <StripeCheckout />
+      <StripeCheckout
+        token={(token) => console.log('+++> client: orderShow token:', token)}
+        stripeKey='pk_test_51IfBkWCsDjis5EwHLBwUpjLj8sO4wHomr7E54qkldrapGtryFNbTxOxzNAeuGyBLggBLBvAogCiNRaEW5wgvxD5K005zyoEGwI'
+        amount={order.ticket.price * 100}
+        email={currentUser.email}
+      />
     </div>
   )
   // return <div>
