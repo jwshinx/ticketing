@@ -7,18 +7,15 @@ export default ({ url, method, body, onSuccess }) => {
   console.log('+++> ur 0')
   const doRequest = async (props = {}) => {
     try {
-      console.log('+++> ur 0.1')
       setErrors(null);
-      console.log('+++> ur 0.2')
       // axios handles get, post, put, etc
       const response = await axios[method](
         url,
         { ...body, ...props }
       );
 
-      console.log('+++> ur 1')
       if (onSuccess) {
-        console.log('+++> ur 2')
+        console.log('+++> ur response.data:', response.data)
         onSuccess(response.data);
       }
 
