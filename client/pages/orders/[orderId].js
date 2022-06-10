@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import StripeCheckout from 'react-stripe-checkout';
+import StripeCheckout from 'react-stripe-checkout';
 // import Router from 'next/router';
 // import useRequest from '../../hooks/use-request';
 
@@ -50,6 +50,7 @@ const OrderShow = ({ order, currentUser }) => {
       <p>Ticket Id: {order.ticket.id}</p>
       <p>Ticket Title: {order.ticket.title}</p>
       <p>Ticket Price: ${order.ticket.price}</p>
+      <StripeCheckout />
     </div>
   )
   // return <div>
