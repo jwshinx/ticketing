@@ -3,6 +3,8 @@ import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
 import { natsWrapper } from '../../nats-wrapper';
 
+jest.mock('../../nats-wrapper')
+
 it('has a route handler listening to /api/tickets for post requests', async () => {
   const resp = await request(app).post('/api/tickets').send({});
   expect(resp.status).not.toEqual(404);
@@ -64,7 +66,8 @@ it('returns an error if an invalid price is provided', async () => {
 });
 
 // 272. creation via route handler.
-xit('creates a ticket with valid inputs', async () => {
+// 337. creating a mock implementation
+it('creates a ticket with valid inputs', async () => {
   let tickets = await Ticket.find({});
   expect(tickets.length).toEqual(0);
 
@@ -77,13 +80,13 @@ xit('creates a ticket with valid inputs', async () => {
     })
     .expect(201)
   
-  // tickets = await Ticket.find({});
+  tickets = await Ticket.find({});
   // console.log("+++> ", tickets);
-  // expect(tickets.length).toEqual(1);
-  // expect(tickets[0].price).toEqual(100);
+  expect(tickets.length).toEqual(1);
+  expect(tickets[0].price).toEqual(100);
 });
 
-xit('publishes an event', async () => {
+it('publishes an event', async () => {
   await request(app)
     .post('/api/tickets')
     .set('Cookie', global.signin())
