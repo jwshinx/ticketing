@@ -30,7 +30,7 @@ it('returns a 401 if the user is not authenticated', async () => {
     .expect(401);
 });
 
-xit('returns a 401 if the user does not own the ticket', async () => {
+it('returns a 401 if the user does not own the ticket', async () => {
   const resp = await request(app)
     .post('/api/tickets')
     .set('Cookie', global.signin())
@@ -50,7 +50,7 @@ xit('returns a 401 if the user does not own the ticket', async () => {
     .expect(401);
 });
 
-xit('returns a 400 if the user provides an invalid title or price', async () => {
+it('returns a 400 if the user provides an invalid title or price', async () => {
   const userCookie = global.signin();
   const resp = await request(app)
     .post('/api/tickets')
@@ -79,7 +79,7 @@ xit('returns a 400 if the user provides an invalid title or price', async () => 
     .expect(400);
 });
 
-xit('updates ticket when valid inputs provided', async () => {
+it('updates ticket when valid inputs provided', async () => {
   const userCookie = global.signin();
   const resp = await request(app)
     .post('/api/tickets')
@@ -110,7 +110,7 @@ xit('updates ticket when valid inputs provided', async () => {
   expect(ticketResp.body.price).toEqual(newPrice);
 });
 
-xit('publishes an event', async () => {
+it('publishes an event', async () => {
   const userCookie = global.signin();
   const resp = await request(app)
     .post('/api/tickets')

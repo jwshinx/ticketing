@@ -2,8 +2,6 @@ import request from 'supertest';
 import { app } from '../../app';
 import mongoose from 'mongoose';
 
-jest.mock('../../nats-wrapper')
-
 const createTicket = () => {
   return request(app)
     .post('/api/tickets')
