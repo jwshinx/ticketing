@@ -63,22 +63,20 @@ it('reserves a ticket', async () => {
     .expect(201);
 });
 
-it.todo('emits and order created event')
+it('emits and order created event', async () => { 
+  const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    title: 'pssfsdsdgsdgb',
+    price: 40
+  });
 
-// xit('emits and order created event', async () => { 
-//   const ticket = Ticket.build({
-//     id: mongoose.Types.ObjectId().toHexString(),
-//     title: 'pssfsdsdgsdgb',
-//     price: 40
-//   });
+  await ticket.save();
 
-//   await ticket.save();
+  await request(app)
+    .post('/api/orders')
+    .set('Cookie', global.signin())
+    .send({ ticketId: ticket.id })
+    .expect(201);
 
-//   await request(app)
-//     .post('/api/orders')
-//     .set('Cookie', global.signin())
-//     .send({ ticketId: ticket.id })
-//     .expect(201);
-
-//   expect(natsWrapper.client.publish).toHaveBeenCalled();
-// });
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
