@@ -1,0 +1,6 @@
+// remove this, so that payment:new.test.ts reaches out to real endpoint
+export const stripe = {
+  charges: {
+    create: jest.fn().mockResolvedValue({}),
+  },
+};
