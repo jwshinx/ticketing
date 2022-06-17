@@ -23,9 +23,9 @@ router.post(
       price,
       userId: req.currentUser!.id
     })
-    console.log('+++> tickets.routes.new.ts 0')
+    // console.log('+++> tickets.routes.new.ts 0')
     await ticket.save()
-    console.log('+++> tickets.routes.new.ts 1')
+    // console.log('+++> tickets.routes.new.ts 1')
     await new TicketCreatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
@@ -33,7 +33,7 @@ router.post(
       userId: ticket.userId,
       version: ticket.version,
     })
-    console.log('+++> tickets.routes.new.ts 2')
+    // console.log('+++> tickets.routes.new.ts 2')
     res.status(201).send(ticket)
   }
 )
