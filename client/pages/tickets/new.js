@@ -34,7 +34,7 @@ const NewTicket = () => {
   };
 
   return (
-    <div>
+    <div className='mt-3'>
       <h1>Create a Ticket</h1>
       <form onSubmit={onSubmit}>
         <div className="form-group">
@@ -45,7 +45,7 @@ const NewTicket = () => {
             className="form-control"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label>Price</label>
           <input 
             value={price}

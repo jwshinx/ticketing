@@ -19,8 +19,8 @@ const LandingPage = ({ currentUser, tickets }) => {
   });
 
   return (
-    <div>
-      <h1>Tickets 1123pm</h1>
+    <div className='mt-3'>
+      <h1>Tickets</h1>
       <table className="table">
         <thead>
           <tr>
@@ -35,11 +35,6 @@ const LandingPage = ({ currentUser, tickets }) => {
       </table>
     </div>
   );
-  // return currentUser ? (
-  //   <h1>You are signed in</h1>
-  // ) : (
-  //   <h1>You are NOT signed in</h1>
-  // );
 };
 
 

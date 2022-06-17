@@ -34,11 +34,16 @@ const OrderShow = ({ order, currentUser }) => {
   }, []); // may need to be [order]
 
   if (timeLeft < 0) {
-    return <div>Order expired</div>
+    return (
+      <div className='mt-3'>
+        <h1>Order expired</h1>
+        <div>Ticket {order.ticket.title} {order.ticket.id} has expired. Please try again.</div>
+      </div>
+    )
   }
 
   return (
-    <div>
+    <div className='mt-3'>
       <h3>Order to purchase</h3>
       <p>
         Time remaining: {timeLeft} seconds
@@ -50,6 +55,11 @@ const OrderShow = ({ order, currentUser }) => {
       <p>Ticket Id: {order.ticket.id}</p>
       <p>Ticket Title: {order.ticket.title}</p>
       <p>Ticket Price: ${order.ticket.price}</p>
+
+      <div class="mx-auto mt-3 mb-3 alert alert-info" role="alert">
+        Click "Pay With Card" and enter fake information: credit card number "4242 4242 4242 4242", any future mm/yy date (eg "09/23") and CVC of any three digit number.
+      </div>
+
       <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
         stripeKey='pk_test_51IfBkWCsDjis5EwHLBwUpjLj8sO4wHomr7E54qkldrapGtryFNbTxOxzNAeuGyBLggBLBvAogCiNRaEW5wgvxD5K005zyoEGwI'

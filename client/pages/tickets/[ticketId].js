@@ -18,9 +18,14 @@ const TicketShow = ({ ticket }) => {
   });
 
   return (
-    <div>
+    <div className='mt-3'>
       <h1>{ticket.title}</h1>
-      <h4>Price4: {ticket.price}</h4>
+      <h4>Price: {ticket.price}</h4>
+
+      <div class="mx-auto mt-3 mb-3 alert alert-info" role="alert">
+        Click below to make a fake purchase using the Stripe API.
+      </div>
+
       {errors}
       <button
         onClick={() => doRequest()}

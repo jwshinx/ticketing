@@ -20,15 +20,19 @@ const Header = ({ currentUser }) => {
     });
 
   return (
-    <nav className="navbar navbar-light bg-light">
-      <Link href="/">
-        <a className="navbar-brand">ticketing</a>
-      </Link>
+    <div style={{ marginLeft: 25, marginRight: 25 }}>
+      <nav className="navbar navbar-light bg-light">
+        <div style={{ marginLeft: 25}} >
+          <Link href="/">
+            <a className="navbar-brand">Ticketing</a>
+          </Link>
+        </div>
 
-      <div className="d-flex justify-content-end">
-        <ul className="nav d-flex align-items-center">{links}</ul>
-      </div>
-    </nav>
+        <div className="d-flex justify-content-end">
+          <ul className="nav d-flex align-items-center">{links}</ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 
