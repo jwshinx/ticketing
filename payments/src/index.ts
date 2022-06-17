@@ -1,36 +1,9 @@
-import express from 'express'
-import 'express-async-errors'
-import { json } from 'body-parser'
 import mongoose from 'mongoose'
-import cookieSession from 'cookie-session'
-import { errorHandler, NotFoundError, currentUser } from '@jslamela/common'
-import { OrderCreatedListener } from './events/listeners/order-created-listener';
-import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
-import { createChargeRouter } from './routes/new'
 
 import { natsWrapper } from './nats-wrapper'
-
-const app = express()
-app.set('trust proxy', true)
-app.use(json())
-app.use(
-  cookieSession({
-    signed: false,
-    secure: true
-  })
-)
-
-app.use(currentUser)
-app.use(createChargeRouter)
-
-// use "all" -- includes get, post, etc.
-app.all('*', async (req, res, next) => {
-  // next(new NotFoundError())
-  console.log('+++> tickets.index.ts: route not found')
-  throw new NotFoundError()
-})
-
-app.use(errorHandler)
+import { app } from './app'
+import { OrderCreatedListener } from './events/listeners/order-created-listener';
+import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
