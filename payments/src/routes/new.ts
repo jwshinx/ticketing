@@ -29,7 +29,7 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { token, orderId } = req.body;
+    const { token, orderId, description } = req.body;
 
     const order = await Order.findById(orderId);
 
@@ -47,6 +47,7 @@ router.post(
       currency: 'usd',
       amount: order.price * 100,
       source: token,
+      description: description === undefined ? undefined : description
     });
 
     const payment = Payment.build({

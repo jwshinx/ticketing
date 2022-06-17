@@ -80,6 +80,7 @@ it('returns a 204 with valid inputs', async () => {
     .send({
       orderId: order.id,
       token: 'tok_visa',
+      description: 'jest test',
     })
     .expect(201);
 
