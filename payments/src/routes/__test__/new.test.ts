@@ -3,13 +3,12 @@ import request from 'supertest';
 import { app } from '../../app';
 import { Order } from '../../models/order';
 import { OrderStatus } from '@jslamela/common';
-// import { natsWrapper } from '../../nats-wrapper';
+import { Payment } from '../../models/payment'
+import { natsWrapper } from '../../nats-wrapper';
 
 // more realistic test - supposed to hit stripe endpoint, but jest hijacks it here
 import { stripe } from '../../stripe';
 // jest.mock('../../stripe');
-
-import { Payment } from '../../models/payment';
 
 it('returns a 404 when purchasing an order that does not exist', async () => {
   await request(app)
@@ -95,6 +94,13 @@ it('returns a 204 with valid inputs', async () => {
   })
   expect(stripeCharge).toBeDefined()
   expect(stripeCharge!.currency).toEqual('usd')
+
+  const payment = await Payment.findOne({
+    orderId: order.id,
+    stripeId: stripeCharge!.id,
+  });
+  expect(payment).not.toBeNull();
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
 });
 
 // it('with valid inputs; returns a 201, creates a payment and publishes payment completed event', async () => {
