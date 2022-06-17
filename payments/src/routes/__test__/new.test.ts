@@ -94,6 +94,7 @@ it('returns a 204 with valid inputs', async () => {
     return charge.amount === price * 100
   })
   expect(stripeCharge).toBeDefined()
+  expect(stripeCharge!.currency).toEqual('usd')
 });
 
 // it('with valid inputs; returns a 201, creates a payment and publishes payment completed event', async () => {

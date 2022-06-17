@@ -37,8 +37,12 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongo.stop();
-  await mongoose.connection.close();
+  // await mongo.stop();
+  // await mongoose.connection.close();
+
+  // above makes a new.test.ts fail. this from comment works.
+  await mongoose.connection.close()
+  await mongo.stop()
 });
 
 // if id is provided, use that - otherwise autogen
