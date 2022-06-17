@@ -23,7 +23,7 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
     // only gets created then completed. just two state. so "version"
     // isnt important. however there may be a future use case where 
     // orders may need updating
-    // (see lecture titled "marking an order as complete")
+    // (see lecture titled "469 marking an order as complete")
     order.set({
       status: OrderStatus.Complete,
     });

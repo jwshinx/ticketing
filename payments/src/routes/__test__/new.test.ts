@@ -64,7 +64,7 @@ it('returns a 400 when purchasing a cancelled order', async () => {
 
 it('returns a 204 with valid inputs', async () => {
   const userId = new mongoose.Types.ObjectId().toHexString();
-  const price = Math.floor(Math.random() * 100000)
+  const price = Math.floor(Math.random() * 10000)
   const order = Order.build({
     id: new mongoose.Types.ObjectId().toHexString(),
     userId,
@@ -83,11 +83,6 @@ it('returns a 204 with valid inputs', async () => {
     })
     .expect(201);
 
-  // const chargeOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0]
-  // expect(chargeOptions.source).toEqual('tok_visa')
-  // expect(chargeOptions.amount).toEqual(20 * 100)
-  // expect(chargeOptions.currency).toEqual('usd')
-
   const stripeCharges = await stripe.charges.list({ limit: 50 })
   const stripeCharge = stripeCharges.data.find(charge => {
     return charge.amount === price * 100
@@ -102,43 +97,3 @@ it('returns a 204 with valid inputs', async () => {
   expect(payment).not.toBeNull();
   expect(natsWrapper.client.publish).toHaveBeenCalled();
 });
-
-// it('with valid inputs; returns a 201, creates a payment and publishes payment completed event', async () => {
-//   const userId = mongoose.Types.ObjectId().toHexString();
-//   // create a random and likely unique value for check against fetch lookup
-//   const price = Math.floor(Math.random() * 100000);
-//   const order = Order.build({
-//     id: mongoose.Types.ObjectId().toHexString(),
-//     userId,
-//     version: 0,
-//     price,
-//     status: OrderStatus.Created,
-//   });
-//   await order.save();
-
-//   // mocked. does not hit stripe endpoint
-//   await request(app)
-//     .post('/api/payments')
-//     .set('Cookie', global.signin(userId))
-//     .send({
-//       token: 'tok_visa',
-//       orderId: order.id,
-//     })
-//     .expect(201);
-
-//   // 50, just in case we run tests in parallel
-//   const stripeCharges = await stripe.charges.list({ limit: 50 });
-//   const stripeCharge = stripeCharges.data.find((charge) => {
-//     return charge.amount === price * 100;
-//   });
-
-//   expect(stripeCharge).toBeDefined();
-//   expect(stripeCharge!.currency).toEqual('usd');
-
-//   const payment = await Payment.findOne({
-//     orderId: order.id,
-//     stripeId: stripeCharge!.id,
-//   });
-//   expect(payment).not.toBeNull();
-//   expect(natsWrapper.client.publish).toHaveBeenCalled();
-// });
