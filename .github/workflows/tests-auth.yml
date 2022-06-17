@@ -8,6 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo ">>> run auth tests"
-      - run: echo ">>> city2:${{ secrets.CITY }}"
       - run: cd auth && npm install && npm run test:ci
