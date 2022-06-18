@@ -16,7 +16,7 @@ const OrderIndex = ({ orders }) => {
       <table className="table">
         <thead>
           <tr>
-            <th>Ticket</th>
+            <th>Ticket 256</th>
             <th>Price</th>
             <th>Status</th>
           </tr>
