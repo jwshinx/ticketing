@@ -1,6 +1,7 @@
 name: deploy-manifests
 
 on:
+  workflow_dispatch: # Put here!! to allow manual triggering
   push:
     branches:
       - main
