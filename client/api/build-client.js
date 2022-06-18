@@ -5,7 +5,7 @@ const BuildClient = ({ req }) => {
     console.log("+++> buildClient for server env");
 
     return axios.create({
-      baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+      baseURL: 'http://www.customguitarsandmore.com',
       headers: req.headers
     });
   } else {
