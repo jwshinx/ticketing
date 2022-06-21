@@ -23,6 +23,7 @@ it('implements optimistic concurrency control', async () => {
   // save first fetched ticket
   await first!.save();
 
+
   // save second fetched ticket and get error
   // this doesnt work
   // expect(async () => {
