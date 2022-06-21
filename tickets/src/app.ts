@@ -12,15 +12,16 @@ import { updateTicketRouter } from './routes/update'
 const app = express()
 app.set('trust proxy', true)
 app.use(json())
-let secureValue = false
-if (process.env.NODE_ENV === 'development') {
-  secureValue = true
-}
+// let secureValue = false
+// if (process.env.NODE_ENV === 'development') {
+//   secureValue = true
+// }
 
 app.use(
   cookieSession({
     signed: false,
-    secure: secureValue
+    // secure: secureValue
+    secure: false
   })
 )
 
