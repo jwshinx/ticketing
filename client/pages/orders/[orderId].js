@@ -56,7 +56,7 @@ const OrderShow = ({ order, currentUser }) => {
       <p>Ticket Title: {order.ticket.title}</p>
       <p>Ticket Price: ${order.ticket.price}</p>
 
-      <div class="mx-auto mt-3 mb-3 alert alert-info" role="alert">
+      <div className="mx-auto mt-3 mb-3 alert alert-info" role="alert">
         Click "Pay With Card" and enter fake information: credit card number "4242 4242 4242 4242", any future mm/yy date (eg "09/23") and CVC of any three digit number.
       </div>
 

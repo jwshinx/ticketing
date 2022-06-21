@@ -6,7 +6,7 @@ import { OrderCreatedListener } from './events/listeners/order-created-listener'
 import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
 
 const start = async () => {
-  console.log('+++> tickets 256')
+  console.log('+++> tickets 6/21 1031am 0')
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined')
   }
@@ -47,7 +47,7 @@ const start = async () => {
     console.log(err)
   }
   app.listen(3000, () => {
-    console.log('listening on port 3000!!xxx!')
+    console.log('listening on port 3000!! 6/21 1031am >>>')
   })
 }
 
