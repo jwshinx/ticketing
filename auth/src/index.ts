@@ -17,7 +17,7 @@ const start = async () => {
     console.log(err)
   }
   app.listen(3000, () => {
-    console.log('listening on port 3000 at 6/20 1021pm!!!')
+    console.log('listening on port 3000 at 6/20 1029pm!!!')
   })
 }
 
