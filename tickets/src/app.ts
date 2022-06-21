@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   secureValue = true
 }
 
-console.log('+++> tickets app.ts 6/21 1204pm secureValue:', secureValue)
+console.log('+++> tickets app.ts 6/21 1235pm secureValue:', secureValue)
 
 app.use(
   cookieSession({

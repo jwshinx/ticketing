@@ -9,10 +9,12 @@ import { createChargeRouter } from './routes/new'
 const app = express()
 app.set('trust proxy', true)
 app.use(json())
-// let secureValue = false
-// if (process.env.NODE_ENV === 'development') {
-//   secureValue = true
-// }
+
+let secureValue = false
+if (process.env.NODE_ENV === 'development') {
+  secureValue = true
+}
+console.log('+++> payments app.ts 6/21 1235pm secureValue:', secureValue)
 
 app.use(
   cookieSession({
