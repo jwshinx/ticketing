@@ -18,7 +18,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker push jaltoids/ticketing-client
-      - run: echo ">>> im in deploy-client 6/21 1111am <<<"
+      - run: echo ">>> im in deploy-client 6/21 1118am <<<"
       - uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
