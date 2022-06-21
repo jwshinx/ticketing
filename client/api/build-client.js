@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BuildClient = ({ req }) => {
   if (typeof window === 'undefined') {
-    console.log("+++> buildClient for server env");
+    console.log("+++> buildClient for server env 1235pm");
 
     return axios.create({
       baseURL: 'http://www.customguitarsandmore.com',
