@@ -13,13 +13,19 @@ import { showOrderRouter } from './routes/show'
 const app = express()
 app.set('trust proxy', true)
 app.use(json())
+let secureValue = false
+if (process.env.NODE_ENV === 'development') {
+  secureValue = true
+}
+
 app.use(
   cookieSession({
     signed: false,
-    secure: false
+    secure: secureValue
   })
 )
-console.log('+++> orders.index 0')
+
+console.log('+++> orders.index 6/21 1017am 0')
 app.use(currentUser)
 app.use(newOrderRouter)
 app.use(showOrderRouter)
