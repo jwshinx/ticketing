@@ -2,7 +2,7 @@ import Link from 'next/link';
 // import BuildClient from "../api/build-client";
 
 const LandingPage = ({ currentUser, tickets }) => {
-  console.log("+++> LandingPage 0 tickets:", tickets);
+  console.log("+++> LandingPage 0 6/21 1204pm tickets:", tickets);
 
   const ticketList = tickets.map(ticket => {
     return (
