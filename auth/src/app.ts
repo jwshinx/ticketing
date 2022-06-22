@@ -20,16 +20,20 @@ app.use(json())
 //   prod: false
 //   dev: true
 
-// let secureValue = false
-// if (process.env.NODE_ENV === 'development') {
-//   secureValue = true
-// }
+let secureValue = false
+if (process.env.NODE_ENV === 'development') {
+  secureValue = true
+}
+console.log('+++> auth app.ts 6/22 1100am process.env.NODE_ENV:', process.env.NODE_ENV)
+console.log('+++> auth app.ts 6/22 1100am JOEL_ENVIRONMENT:', process.env.JOEL_ENVIRONMENT)
+console.log('+++> auth app.ts 6/22 1100am secureValue:', secureValue)
 
 app.use(
   cookieSession({
     signed: false,
-    // secure: secureValue
-    secure: false
+    secure: secureValue
+    // secure: false
+    // secure: process.env.NODE_ENV !== 'test',
   })
 )
 

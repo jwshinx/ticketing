@@ -12,18 +12,22 @@ import { updateTicketRouter } from './routes/update'
 const app = express()
 app.set('trust proxy', true)
 app.use(json())
+
 let secureValue = false
-if (process.env.NODE_ENV === 'development') {
+if (process.env.JOEL_ENVIRONMENT === 'development') {
   secureValue = true
 }
 
-console.log('+++> tickets app.ts 6/21 1235pm secureValue:', secureValue)
+console.log('+++> tickets app.ts 6/22 1100am process.env.NODE_ENV:', process.env.NODE_ENV)
+console.log('+++> tickets app.ts 6/22 1100am JOEL_ENVIRONMENT:', process.env.JOEL_ENVIRONMENT)
+console.log('+++> tickets app.ts 6/22 1100am secureValue:', secureValue)
 
 app.use(
   cookieSession({
     signed: false,
-    // secure: secureValue
-    secure: false
+    secure: secureValue
+    // secure: false
+    // secure: process.env.NODE_ENV !== 'test',
   })
 )
 
