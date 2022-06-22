@@ -29,7 +29,8 @@ app.use(
   cookieSession({
     signed: false,
     // secure: secureValue
-    secure: false
+    // secure: false
+    secure: process.env.NODE_ENV !== 'test',
   })
 )
 
