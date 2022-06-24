@@ -24,7 +24,7 @@ const Header = ({ currentUser }) => {
       <nav className="navbar navbar-light bg-light">
         <div style={{ marginLeft: 25}} >
           <Link href="/">
-            <a className="navbar-brand">Ticketing...</a>
+            <a className="navbar-brand">Ticketing</a>
           </Link>
         </div>
 
