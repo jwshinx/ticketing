@@ -24,9 +24,9 @@ let secureValue = false
 if (process.env.NODE_ENV === 'development') {
   secureValue = true
 }
-console.log('+++> auth app.ts 6/24 1100am process.env.NODE_ENV:', process.env.NODE_ENV)
-console.log('+++> auth app.ts 6/24 1100am JOEL_ENVIRONMENT:', process.env.JOEL_ENVIRONMENT)
-console.log('+++> auth app.ts 6/24 1100am secureValue:', secureValue)
+console.log('+++> auth app.ts 6/25 1100am process.env.NODE_ENV:', process.env.NODE_ENV)
+console.log('+++> auth app.ts 6/25 1100am JOEL_ENVIRONMENT:', process.env.JOEL_ENVIRONMENT)
+console.log('+++> auth app.ts 6/25 1100am secureValue:', secureValue)
 
 app.use(
   cookieSession({

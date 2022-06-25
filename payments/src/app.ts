@@ -14,9 +14,9 @@ let secureValue = false
 if (process.env.JOEL_ENVIRONMENT === 'development') {
   secureValue = true
 }
-console.log('+++> payment app.ts 6/24 1100am process.env.NODE_ENV:', process.env.NODE_ENV)
-console.log('+++> payment app.ts 6/24 1100am JOEL_ENVIRONMENT:', process.env.JOEL_ENVIRONMENT)
-console.log('+++> payment app.ts 6/24 1100am secureValue:', secureValue)
+console.log('+++> payment app.ts 6/25 1100am process.env.NODE_ENV:', process.env.NODE_ENV)
+console.log('+++> payment app.ts 6/25 1100am JOEL_ENVIRONMENT:', process.env.JOEL_ENVIRONMENT)
+console.log('+++> payment app.ts 6/25 1100am secureValue:', secureValue)
 
 app.use(
   cookieSession({
