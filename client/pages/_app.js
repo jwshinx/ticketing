@@ -26,7 +26,7 @@ AppComponent.getInitialProps = async appContext => {
     )
   }
 
-  console.log('+++> _app getInitialProps 6/25 245pm', pageProps)
+  console.log('+++> _app getInitialProps 6/25 345pm', pageProps)
   // data includes currentUser
   return {
     pageProps,
